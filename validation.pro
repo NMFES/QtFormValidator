@@ -1,6 +1,6 @@
 QT       -= gui
 
-TARGET = validation
+TARGET = QtFormValidation
 TEMPLATE = lib
 CONFIG += staticlib c++11
 
