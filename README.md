@@ -44,8 +44,9 @@ There are several validation rules. Some of them have mandatory params.
 
 Params marked with * are optional. 
 
+## Full example
+
 ```c++
-#include -- common QT includes here --
 #include <"qtformvalidator.h">
 
 int main(int argc, char* argv[]) {
@@ -63,7 +64,6 @@ int main(int argc, char* argv[]) {
         {"object", QJsonObject {{"prop", 10}}},
     };
 
-    // full example
     Validator validator1(data, {
         {
             "name", {
@@ -110,7 +110,31 @@ int main(int argc, char* argv[]) {
     } else {
         qDebug() << "FAIL" << validator1.getError();
     }
+    
+    return a.exec();
+}
+```
 
+
+## Compact example
+
+```c++
+#include <"qtformvalidator.h">
+
+int main(int argc, char* argv[]) {
+    QCoreApplication a(argc, argv);
+    
+    using namespace QtFormValidator;
+
+    // data to check
+    QJsonObject data {
+        {"name", "NMFES"},
+        {"type", 3},
+        {"email", "username@gmail.com"},
+        {"checked", "1"},
+        {"options", QJsonArray {"one", "two"}},
+        {"object", QJsonObject {{"prop", 10}}},
+    };
 
     // compact example without custom error messages and without extra spaces
     Validator validator2(data, {
