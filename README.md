@@ -78,8 +78,8 @@ int main(int argc, char* argv[]) {
                 new NumericRule({{"min", 1}, {"max", 5}, {"in", QJsonArray {1, 3, 5}}, {"message", "Wrong \"type\""}}),
                 new CallbackRule([](const QString & name, const QJsonObject & data, QString & message) {
                     return true;
-                    message = "Wrong value";
-                    return false;
+                    // message = "Wrong value";
+                    // return false;
                 }),
             }
         },
