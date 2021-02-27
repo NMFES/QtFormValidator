@@ -1,7 +1,7 @@
 #include "rule.h"
 
 namespace QtFormValidator {
-    Rule::Rule(QHash<QString, QVariant> params) {}
+    Rule::Rule(QHash<QString, QVariant> params): params(params) {}
 
     Rule::~Rule() {}
 
