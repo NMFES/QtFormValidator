@@ -13,7 +13,7 @@ To add the library use the following steps:
 - Add to your main project .pro file `SUBDIRS += QtFormValidator`. Then you should see the next structure in Qt Creator: main project (step 1), it includes your console app (step 2) and QtFormValidator project (step 3-4).
 - Right click on your console app project and hit Add library -> Internal library -> select QtFormValidator. Click finish. It will add some code for Qmake into your console app .pro-file. Now you can include the library.
 
-Please refer [Qt Docs SUBDIRS](https://doc.qt.io/qt-5/qmake-variable-reference.html#subdirs) if you have some troubles with understanding.
+Please refer [Qt Docs SUBDIRS](https://doc.qt.io/qt-5/qmake-variable-reference.html#subdirs) and [Qt Wiki](https://wiki.qt.io/SUBDIRS_-_handling_dependencies) if you have some troubles with understanding.
 
 ## Validation Rules
 
