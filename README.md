@@ -136,7 +136,6 @@ int main(int argc, char* argv[]) {
         {"object", QJsonObject {{"prop", 10}}},
     };
 
-    // compact example without custom error messages and without extra spaces
     Validator validator2(data, {
         {
             "name", {
