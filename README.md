@@ -13,6 +13,37 @@ To add the library use the following steps:
 - Add to your main project .pro file `SUBDIRS += QtFormValidator`. Then you should see the next structure in Qt Creator: main project (step 1), it includes your console app (step 2) and QtFormValidator project (step 3-4).
 - Right click on your console app project and hit Add library -> Internal library -> select QtFormValidator. Click finish. It will add some code for Qmake into your console app .pro-file. Now you can include the library.
 
+## Validation Rules
+
+There are several validation rules. Some of them have mandatory params. 
+- **StringRule**. Value must be a string:
+    - [min*] (int) Minimal string length
+    - [max*] (int) Maximal string length
+    - [in*] (QStringList) List of valid values
+
+- **CallbackRule**. Custom valudation using your own code:
+    - Lambda-function. Must return boolean value (`true` if checking value in this function is valid). You can use here any you code if provided rules not enough for you. Your function will accept field name (`name`), a whole data object (`data`), you can use here already validated fields (which are above this rule in rules list). Mandatory.
+
+- **NumericRule**. Value must be `int` or `Double`:
+    - [min*] (Double) Minimal value
+    - [max*] (Double) Maximal value
+    - [in*] (QJsonArray) List of valid values (Double)
+
+- **RegexRule**. Value must be a string and pass given Regex pattern:
+    - [pattern] (QString) Pattern to check. Mandatory
+    - [options*] (int) Qt Regex options. [See Qt docs](https://doc.qt.io/qt-5/qregularexpression.html#PatternOption-enum)
+
+- **BooleanRule**. Value must be a boolean:
+    - [equals] (bool) If field value must be `true` or `false`. Optional.
+
+- **ArrayRule**. Value must be a QJsonArray value:
+    - [message*] (QString) Custom error message
+
+- **JsonRule**. Value must be a QJsonObject value:
+    - [message*] (QString) Custom error message
+
+Params marked with * are optional. 
+
 ```c++
 #include -- common QT includes here --
 #include <"qtformvalidator.h">
