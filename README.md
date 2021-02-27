@@ -42,7 +42,8 @@ There are several validation rules. Some of them have mandatory params.
 - **JsonRule**. Value must be a QJsonObject value:
     - [message*] (QString) Custom error message
 
-Params marked with * are optional. 
+Params marked with * are optional. Validation stops once there was at least one error. 
+As you can see we use RAW pointers to minify our rules code. Anyway each pointer will be deleted in Validator destructor once Validator object leaves current visibility area.
 
 ## Full example
 
