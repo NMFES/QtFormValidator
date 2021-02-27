@@ -10,27 +10,27 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    arrayrule.cpp \
-    booleanrule.cpp \
-    callbackrule.cpp \
-    jsonrule.cpp \
-    numericrule.cpp \
-    regexrule.cpp \
-    rule.cpp \
-    stringrule.cpp \
-    validator.cpp
+    src/arrayrule.cpp \
+    src/booleanrule.cpp \
+    src/callbackrule.cpp \
+    src/jsonrule.cpp \
+    src/numericrule.cpp \
+    src/regexrule.cpp \
+    src/rule.cpp \
+    src/stringrule.cpp \
+    src/validator.cpp
 
 HEADERS += \
-    arrayrule.h \
-    booleanrule.h \
-    callbackrule.h \
-    jsonrule.h \
-    numericrule.h \
+    src/arrayrule.h \
+    src/booleanrule.h \
+    src/callbackrule.h \
+    src/jsonrule.h \
+    src/numericrule.h \
     qtformvalidator.h \
-    regexrule.h \
-    rule.h \
-    stringrule.h \
-    validator.h
+    src/regexrule.h \
+    src/rule.h \
+    src/stringrule.h \
+    src/validator.h
 
 # Default rules for deployment.
 unix {
