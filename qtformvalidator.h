@@ -1,6 +1,10 @@
 #pragma once
-
-class QtFormValidator {
-    public:
-        QtFormValidator();
-};
+#include "validator.h"
+#include "rule.h"
+#include "stringrule.h"
+#include "arrayrule.h"
+#include "booleanrule.h"
+#include "jsonrule.h"
+#include "numericrule.h"
+#include "regexrule.h"
+#include "callbackrule.h"
