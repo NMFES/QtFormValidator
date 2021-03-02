@@ -14,7 +14,7 @@ namespace QtFormValidator {
         }
     }
 
-    bool Validator::valid() {
+    bool Validator::validate() {
         QList<QPair<QString, QList<Rule*>>>::iterator iterator;
 
         // get attribute's list of rules
@@ -28,7 +28,6 @@ namespace QtFormValidator {
                     setError(rule->getError());
                     return false;
                 }
-
             }
         }
 

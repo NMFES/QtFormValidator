@@ -8,3 +8,4 @@
 #include "src/numericrule.h"
 #include "src/regexrule.h"
 #include "src/callbackrule.h"
+#include "src/form.h"

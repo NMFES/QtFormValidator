@@ -13,6 +13,7 @@ SOURCES += \
     src/arrayrule.cpp \
     src/booleanrule.cpp \
     src/callbackrule.cpp \
+    src/form.cpp \
     src/jsonrule.cpp \
     src/numericrule.cpp \
     src/regexrule.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     src/arrayrule.h \
     src/booleanrule.h \
     src/callbackrule.h \
+    src/form.h \
     src/jsonrule.h \
     src/numericrule.h \
     qtformvalidator.h \
@@ -37,3 +39,6 @@ unix {
     target.path = $$[QT_INSTALL_PLUGINS]/generic
 }
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    QtFormValidator
