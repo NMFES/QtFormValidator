@@ -1,6 +1,6 @@
 # Introduction
 
-QT doesn't provide enough tools to validate user's input (at least v5.15). We can use QDoubleValidator, QIntValidator, and QRegularExpressionValidator. So if we want to validate some strings we have to use built-in methods like isEmpty() / isNull(), or write manual strings length checking; for numbers we have to write our code with many if/else statements. Also it doesn't explain the way how to separate validation code of business logic (like MVC pattern).
+Qt doesn't provide enough tools to validate user's input (at least v5.15). We can use QDoubleValidator, QIntValidator, and QRegularExpressionValidator. So if we want to validate some strings we have to use built-in methods like isEmpty() / isNull(), or write manual strings length checking; for numbers we have to write our code with many if/else statements. Also it doesn't explain the way how to separate validation code of business logic (like MVC pattern).
 
 # Quick start
 
@@ -45,12 +45,12 @@ There are several validation rules. Some of them have mandatory params.
     - [message*] (QString) Custom error message
 
 Params marked with * are optional. Validation stops once there was at least one error. 
-As you can see we use RAW pointers to minify our rules code. Anyway each pointer will be deleted in Validator destructor once Validator object leaves current visibility area.
+As you can see we use RAW pointers to minify our rules code. Anyway each pointer will be deleted in Validator destructor once Validator object leaves current visibility area. Not tested with Qt v6.
 
 ## Full example
 
 ```c++
-#include <"qtformvalidator.h">
+#include <QtFormValidator>
 
 int main(int argc, char* argv[]) {
     QCoreApplication a(argc, argv);
@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
         {"object", QJsonObject {{"prop", 10}}},
     };
 
-    Validator validator1(data, {
+    Validator validator(data, {
         {
             "name", {
                 new StringRule({{"min", 3}, {"max", 5}, {"in", QStringList {"GitHub", "NMFES"}}, {"message", "Wrong \"name\""}}),
@@ -108,10 +108,10 @@ int main(int argc, char* argv[]) {
         },
     });
 
-    if (validator1.valid()) {
+    if (validator.validate()) {
         qDebug() << "OK";
     } else {
-        qDebug() << "FAIL" << validator1.getError();
+        qDebug() << "FAIL" << validator.getError();
     }
     
     return a.exec();
@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
 ## Compact example
 
 ```c++
-#include <"qtformvalidator.h">
+#include <QtFormValidator>
 
 int main(int argc, char* argv[]) {
     QCoreApplication a(argc, argv);
@@ -139,7 +139,7 @@ int main(int argc, char* argv[]) {
         {"object", QJsonObject {{"prop", 10}}},
     };
 
-    Validator validator2(data, {
+    Validator validator(data, {
         {
             "name", {
                 new StringRule({{"min", 3}, {"max", 5}, {"in", QStringList {"GitHub", "NMFES"}}}),
@@ -162,12 +162,78 @@ int main(int argc, char* argv[]) {
         { "object", { new JsonRule() } },
     });
 
-    if (validator2.valid()) {
+    if (validator.valid()) {
         qDebug() << "OK";
     } else {
-        qDebug() << "FAIL" << validator2.getError();
+        qDebug() << "FAIL" << validator.getError();
     }
     
     return a.exec();
+}
+```
+
+## Using Forms
+
+Let's imagine you want to move previous code somewhere. Forms gives you that ability. It is a some king of Model. To use it you have to create a derived from Form class (.h, .cpp) somewhere in `forms` directory:
+
+```c++
+#pragma once
+#include <QtFormValidator>
+
+using namespace QtFormValidator;
+
+class UserForm: public Form {
+    public:
+        UserForm(const QJsonObject& data, const QHash<QString, QVariant>& extra = {});
+        bool isBanned();
+};
+```
+
+```c++
+#include "user_form.h"
+
+bool UserForm::isBanned() {
+    return false;
+}
+
+UserForm::UserForm(const QJsonObject& data, const QHash<QString, QVariant>& extra): Form(data, extra) {
+    validator = new Validator (data, {
+        {
+            "name", {
+                new StringRule({{"min", 3}, {"max", 5}, {"in", QStringList {"GitHub", "NMFES"}}, {"message", "Wrong \"name\""}}),
+                new CallbackRule([](const QString & name, const QJsonObject & data, QString & message) {
+                    return true;
+                }),
+            }
+        },
+    });
+}
+```
+
+Then in your main.cpp include this user_form and call validation from it:
+
+```c++
+#include "forms/user_form.h"
+...
+UserForm userForm({
+    {"name", "NMFES"},
+});
+
+qDebug() << userForm.validate();
+qDebug() << userForm.getError();
+qDebug() << userForm.isBanned();
+        
+```
+
+That's it. Also you could see some `isBanned` method. It is a custom method which is not really needed. But you can add as many custom methods as you want. In our case we use it after we are convinced that given data is valid and we can check if this user is banned, exists etc.
+
+```c++
+...
+UserForm userForm({
+    {"name", "NMFES"},
+});
+
+if (userForm.validate() && !userForm.isBanned()) {
+    // sign in him
 }
 ```
