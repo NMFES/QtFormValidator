@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
 
 ## Using Forms
 
-Let's imagine you want to move previous code somewhere. Forms gives you that ability. It is a some king of Model. To use it you have to create a derived from Form class (.h, .cpp) somewhere in `forms` directory:
+Let's imagine you want to move previous code somewhere. Forms give you that ability. It is a some kind of Model. To use it you have to create a derived from Form class (.h, .cpp) somewhere in `forms` directory:
 
 ```c++
 #pragma once
@@ -210,7 +210,7 @@ UserForm::UserForm(const QJsonObject& data, const QHash<QString, QVariant>& extr
 }
 ```
 
-Then in your main.cpp include this user_form and call validation from it:
+Then in your `main.cpp` include this user_form and call validation from it:
 
 ```c++
 #include "forms/user_form.h"
