@@ -162,7 +162,7 @@ int main(int argc, char* argv[]) {
         { "object", { new JsonRule() } },
     });
 
-    if (validator.valid()) {
+    if (validator.validate()) {
         qDebug() << "OK";
     } else {
         qDebug() << "FAIL" << validator.getError();
