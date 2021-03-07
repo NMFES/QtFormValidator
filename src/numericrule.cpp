@@ -42,6 +42,9 @@ namespace QtFormValidator {
 
             // check if the value present in given range
             if (iterator.key() == "in") {
+                qDebug() << value.toDouble();
+                qDebug() << iterator.value().toJsonArray();
+
                 if (!iterator.value().toJsonArray().contains(value.toDouble())) {
                     return false;
                 }

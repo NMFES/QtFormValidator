@@ -8,10 +8,19 @@ namespace QtFormValidator {
     }
 
     bool Form::validate() {
-        return validator->validate();
+        return validator->validate() ? after() : failed(validator->getError());
     }
 
     QString Form::getError() {
-        return validator->getError();
+        return error;
+    }
+
+    bool Form::after() {
+        return true;
+    }
+
+    bool Form::failed(const QString& message) {
+        error = message;
+        return false;
     }
 }

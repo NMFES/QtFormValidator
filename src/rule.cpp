@@ -12,5 +12,4 @@ namespace QtFormValidator {
     QString Rule::getError() {
         return error;
     }
-
 }

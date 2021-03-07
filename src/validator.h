@@ -13,8 +13,8 @@ namespace QtFormValidator {
         public:
             Validator(QJsonObject data = {}, QList<QPair<QString, QList<Rule*>>> rules = {});
             ~Validator();
-            bool validate();
-            QString getError();
-            void    setError(const QString& error);
+            bool            validate();
+            QString         getError();
+            void            setError(const QString& error);
     };
 }
