@@ -41,4 +41,5 @@ unix {
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    LICENSE \
     QtFormValidator
