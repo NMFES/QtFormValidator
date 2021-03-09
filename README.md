@@ -224,13 +224,13 @@ Then in your `main.cpp` include this user_form and call validation from it:
 ```c++
 #include "forms/user_form.h"
 ...
-UserForm userForm({
+UserForm form({
     {"name", "NMFES"},
 });
 
-qDebug() << userForm.validate();
-qDebug() << userForm.getError();
-qDebug() << userForm.isBanned();
+qDebug() << form.validate();
+qDebug() << form.getError();
+qDebug() << form.isBanned();
         
 ```
 
@@ -240,11 +240,11 @@ The hook `after()` will be called only if previous validation rules are passed s
 
 ```c++
 ...
-UserForm userForm({
+UserForm form({
     {"name", "NMFES"},
 });
 
-if (userForm.validate() && !userForm.isBanned()) {
+if (form.validate() && !form.isBanned()) {
     // sign in him
 }
 ```
