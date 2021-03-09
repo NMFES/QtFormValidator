@@ -40,6 +40,7 @@ There are several validation rules. Some of them have mandatory params.
 
 - **ArrayRule**. Value must be a QJsonArray value:
     - [message*] (QString) Custom error message
+    - [in*] (QJsonArray) List of valid values (Double/QString)
 
 - **JsonRule**. Value must be a QJsonObject value:
     - [message*] (QString) Custom error message
@@ -186,6 +187,9 @@ class UserForm: public Form {
     public:
         UserForm(const QJsonObject& data, const QHash<QString, QVariant>& extra = {});
         bool isBanned();
+        
+    protected:
+        virtual bool after();
 };
 ```
 
@@ -208,6 +212,11 @@ UserForm::UserForm(const QJsonObject& data, const QHash<QString, QVariant>& extr
         },
     });
 }
+
+bool UserForm::after() {
+    return (your statement) ? true : failed();
+}
+
 ```
 
 Then in your `main.cpp` include this user_form and call validation from it:
@@ -215,25 +224,27 @@ Then in your `main.cpp` include this user_form and call validation from it:
 ```c++
 #include "forms/user_form.h"
 ...
-UserForm userForm({
+UserForm form({
     {"name", "NMFES"},
 });
 
-qDebug() << userForm.validate();
-qDebug() << userForm.getError();
-qDebug() << userForm.isBanned();
+qDebug() << form.validate();
+qDebug() << form.getError();
+qDebug() << form.isBanned();
         
 ```
 
-That's it. Also you could see some `isBanned` method. It is a custom method which is not really needed. But you can add as many custom methods as you want. In our case we use it after we are convinced that given data is valid and we can check if this user is banned, exists etc.
+That's it. Also you could see there is `isBanned` method. It is a custom method which is not really needed. But you can add as many custom methods as you want. In our case we use it after we are convinced that given data is valid and we can check if this user is banned, exists etc.
+
+The hook `after()` will be called only if previous validation rules are passed successfully. This method must return true if all is good. If there were any errors you need to return `failed("your custom error here")`.
 
 ```c++
 ...
-UserForm userForm({
+UserForm form({
     {"name", "NMFES"},
 });
 
-if (userForm.validate() && !userForm.isBanned()) {
+if (form.validate() && !form.isBanned()) {
     // sign in him
 }
 ```
