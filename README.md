@@ -236,7 +236,7 @@ qDebug() << form.isBanned();
 
 That's it. Also you could see there is `isBanned` method. It is a custom method which is not really needed. But you can add as many custom methods as you want. In our case we use it after we are convinced that given data is valid and we can check if this user is banned, exists etc.
 
-The hook `after()` will be called only if previous validation rules are passed successfully. This method must return true if all is good. If there were any errors you need to return `failed("your custom error here")`.
+The hook `after()` will be called only if previous validation rules are passed successfully. This method must return true if all is good. If there were any errors you need to return `failed("your custom error here")`. Your form will contain an error as QPair<QString, QString> where `first` is an attribute name and `second` is an attribute error message. For short syntax of `failed()` the attribute name will be "_".
 
 ```c++
 ...
