@@ -35,11 +35,11 @@ namespace QtFormValidator {
         return true;
     }
 
-    QString Validator::getError() {
+    QPair<QString, QString> Validator::getError() {
         return error;
     }
 
-    void Validator::setError(const QString& error) {
+    void Validator::setError(QPair<QString, QString> error) {
         this->error = error;
     }
 }

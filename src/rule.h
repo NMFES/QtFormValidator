@@ -8,14 +8,14 @@ namespace QtFormValidator {
     class Rule {
         protected:
             QHash<QString, QVariant>    params;
-            QString                     error;
+            QPair<QString, QString>     error;
 
             Rule(QHash<QString, QVariant> params = {});
 
         public:
-            virtual bool    validate(QString name, QJsonObject data) = 0;
-            virtual         ~Rule();
-            void            setError(const QString& name, const QVariant& message);
-            QString         getError();
+            virtual bool            validate(QString name, QJsonObject data) = 0;
+            virtual                 ~Rule();
+            void                    setError(const QString& name, const QVariant& message);
+            QPair<QString, QString> getError();
     };
 }

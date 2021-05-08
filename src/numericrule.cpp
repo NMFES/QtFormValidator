@@ -22,7 +22,7 @@ namespace QtFormValidator {
             if (iterator.key() == "min") {
                 if (value.toDouble() < iterator.value().toDouble()) {
                     if (message.isNull()) {
-                        setError(name, "\"" + name + "\" must be greater than " + iterator.value().toString());
+                        setError(name, "Value must be greater than " + iterator.value().toString());
                     }
 
                     return false;
@@ -33,7 +33,7 @@ namespace QtFormValidator {
             if (iterator.key() == "max") {
                 if (value.toDouble() > iterator.value().toDouble()) {
                     if (message.isNull()) {
-                        setError(name, "\"" + name + "\" must be less than " + iterator.value().toString());
+                        setError(name, "Value must be less than " + iterator.value().toString());
                     }
 
                     return false;

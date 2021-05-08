@@ -17,7 +17,7 @@ namespace QtFormValidator {
                 }
             }
         } else if (value.isDouble()) {
-            QList<QVariant> allowed {1, 0};
+            QVector<QVariant> allowed {1, 0};
             // the value is not in the allowed list
             if (!allowed.contains(value.toDouble())) {
                 return false;
@@ -29,7 +29,7 @@ namespace QtFormValidator {
                 }
             }
         } else if (value.isString()) {
-            QList<QVariant> allowed {"true", "false", "1", "0"};
+            QVector<QVariant> allowed {"true", "false", "1", "0"};
             // the value is not in the allowed list
             if (!allowed.contains(value.toString())) {
                 return false;

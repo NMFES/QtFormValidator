@@ -8,13 +8,13 @@ namespace QtFormValidator {
         private:
             QList<QPair<QString, QList<Rule*>>> rules;
             QJsonObject                         data;
-            QString                             error;
+            QPair<QString, QString>             error;
 
         public:
             Validator(QJsonObject data = {}, QList<QPair<QString, QList<Rule*>>> rules = {});
             ~Validator();
-            bool            validate();
-            QString         getError();
-            void            setError(const QString& error);
+            bool                    validate();
+            QPair<QString, QString> getError();
+            void                    setError(QPair<QString, QString> error);
     };
 }

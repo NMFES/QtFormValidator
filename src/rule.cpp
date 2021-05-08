@@ -6,10 +6,11 @@ namespace QtFormValidator {
     Rule::~Rule() {}
 
     void Rule::setError(const QString& name, const QVariant& message) {
-        error = message.isNull() ? "\"" + name + "\" is invalid" :  message.toString();
+        error.first     = name;
+        error.second    = message.isNull() ? "Invalid field" :  message.toString();
     }
 
-    QString Rule::getError() {
+    QPair<QString, QString> Rule::getError() {
         return error;
     }
 }
